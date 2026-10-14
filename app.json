@@ -8,7 +8,11 @@
     "scheme": "rn2",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/expo.icon"
+      "icon": "./assets/expo.icon",
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSFaceIDUsageDescription": "We use Face ID to securely log you into your account."
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -17,7 +21,19 @@
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "android.permission.VIBRATE",
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.USE_BIOMETRIC",
+        "android.permission.USE_FINGERPRINT",
+        "android.permission.NFC"
+      ],
+      "package": "com.mayonesium.RN2"
     },
     "web": {
       "output": "static",
@@ -32,7 +48,46 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 76
         }
-      ]
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Permitir el uso de la cámara para probar fotos, códigos y linterna.",
+          "recordAudioAndroid": false,
+          "barcodeScannerEnabled": true
+        }
+      ],
+      [
+        "expo-audio",
+        {
+          "microphonePermission": "Permitir el uso del micrófono para probar grabaciones.",
+          "enableBackgroundRecording": false,
+          "enableBackgroundPlayback": false
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Permitir el uso de la ubicación para probar el GPS y la brújula.",
+          "isAndroidBackgroundLocationEnabled": false,
+          "isAndroidForegroundServiceEnabled": false,
+          "isIosBackgroundLocationEnabled": false
+        }
+      ],
+      [
+        "expo-local-authentication",
+        {
+          "faceIDPermission": "Permitir el uso de Face ID para probar la biometría."
+        }
+      ],
+      [
+        "expo-sensors",
+        {
+          "motionPermission": "Permitir el uso de los sensores para probar movimiento y orientación."
+        }
+      ],
+      "react-native-nfc-manager",
+      "expo-asset"
     ],
     "experiments": {
       "typedRoutes": true,

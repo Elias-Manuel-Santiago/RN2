@@ -1,18 +1,31 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useColorScheme } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { View, StyleSheet } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
-import AppTabs from '@/components/app-tabs';
+import { ToolTabs } from '@/components/navigation/tool-tabs';
+import { ThemeToggle } from '@/components/theme/theme-toggle';
+import { ThemeProvider, useTheme } from '@/theme/theme-provider';
 
-SplashScreen.preventAutoHideAsync();
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+function AppLayout() {
+  const { colors, isDark } = useTheme();
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AnimatedSplashOverlay />
-      <AppTabs />
-    </ThemeProvider>
+    <View style={[styles.root, { backgroundColor: colors.background }]}>
+      <StatusBar style={isDark ? 'light' : 'dark'} />
+      <ToolTabs />
+      <ThemeToggle />
+    </View>
   );
 }
+
+/** El tema y las áreas seguras son compartidos por todas las rutas. */
+export default function RootLayout() {
+  return (
+    <SafeAreaProvider>
+      <ThemeProvider>
+        <AppLayout />
+      </ThemeProvider>
+    </SafeAreaProvider>
+  );
+}
+
+const styles = StyleSheet.create({ root: { flex: 1 } });
